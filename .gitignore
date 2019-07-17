@@ -3,5 +3,17 @@ ref.md
 SimpleCCompile/Todo.md
 SimpleCCompile/Compare.md
 SimpleCCompile/test
+SimpleCCompile/c_bison.tab.c
+SimpleCCompile/src/c_bison.tab.c
+SimpleCCompile/src/c_bison.tab.h
+SimpleCCompile/src/c_bison.tab.o
+SimpleCCompile/src/c_lexer.yy.o
+SimpleCCompile/src/c_lexer.yy.c
+SimpleCCompile/1
+SimpleCCompile/test1.s
+
+
+
+
 
 
