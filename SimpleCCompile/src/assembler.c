@@ -251,7 +251,6 @@ int assemble(const char* in_name, const char* tmp_name, const char* out_name) {
     SymbolTable* reltbl = create_table(SYMTBL_NON_UNIQUE);
 
     if (in_name) {
-        printf("Running pass one: %s -> %s\n", in_name, tmp_name);
         if (open_files(&src, &dst, in_name, tmp_name) != 0) {
             free_table(symtbl);
             free_table(reltbl);
@@ -265,7 +264,6 @@ int assemble(const char* in_name, const char* tmp_name, const char* out_name) {
     }
 
     if (out_name) {
-        printf("Running pass two: %s -> %s\n", tmp_name, out_name);
         if (open_files(&src, &dst, tmp_name, out_name) != 0) {
             free_table(symtbl);
             free_table(reltbl);
@@ -276,13 +274,7 @@ int assemble(const char* in_name, const char* tmp_name, const char* out_name) {
         if (pass_two(src, dst, symtbl, reltbl) != 0) {
             err = 1;
         }
-        
-        fprintf(dst, "\n.symbol\n");
-        write_table(symtbl, dst);
-
-        fprintf(dst, "\n.relocation\n");
-        write_table(reltbl, dst);
-
+    
         close_files(src, dst);
     }
     

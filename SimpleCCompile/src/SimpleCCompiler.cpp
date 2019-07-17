@@ -15,7 +15,7 @@
 
 static void print_usage_and_exit() {
     printf("Usage:\n");
-    printf("./SimpleCCompiler < <target.c> <target.s> <target.int> <target.out>\n");
+    printf("./SimpleCCompiler <target.c> <target.s> <target.int> <target.out>\n");
     // printf("  Runs both passes: assembler <input file> <intermediate file> <output file>\n");
     // printf("  Run pass #1:      assembler -p1 <input file> <intermediate file>\n");
     // printf("  Run pass #2:      assembler -p2 <intermediate file> <output file>\n");
@@ -23,30 +23,30 @@ static void print_usage_and_exit() {
     exit(0);
 }
 
-extern int Parse1(std::ofstream &outFile);
+extern int Parse1();
 
 
 int main(int argc, char **argv) {
-    std::cout << argc << std::endl;
-    for(int i = 0; i < argc; ++i)
-    {
-        std::cout << argv[i] << std::endl;
-    }
+    // std::cout << argc << std::endl;
+    // for(int i = 0; i < argc; ++i)
+    // {
+    //     std::cout << argv[i] << std::endl;
+    // }
 
-    if (argc != 4) {
+    if (argc != 5) {
         print_usage_and_exit();
     }
 
-    std::ofstream outFile;
-    outFile.open(argv[1], std::ios::in | std::ios::out | std::ios::binary);
-    Parse1(outFile);
-    outFile.close();
+    freopen(argv[2], "w", stdout);
+    freopen(argv[1], "r", stdin);
+
+    Parse1();
    
     char *input, *inter, *output;
 
-    input = argv[1];
-    inter = argv[2];
-    output = argv[3];
+    input = argv[2];
+    inter = argv[3];
+    output = argv[4];
 
     int err = assemble(input, inter, output);
 
@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
     }
 
     if (is_log_file_set()) {
-        printf("Results saved to %s\n", argv[3]);
+        printf("Results saved to %s\n", argv[4]);
     }
 
     return err;

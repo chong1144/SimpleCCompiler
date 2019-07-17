@@ -611,10 +611,6 @@ int yyerror(const char* s){
     return -1;
 }
 
-int Parse1(std::ofstream &outFile) {
-  std::stringstream ss;
-  ss << yyparse();
-  outFile << ss.rdbuf();
-
-  return 0;
+int Parse1() {
+  return yyparse();
 }
