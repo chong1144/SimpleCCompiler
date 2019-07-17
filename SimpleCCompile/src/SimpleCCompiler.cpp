@@ -10,16 +10,11 @@
 #include "translate_utils.h"
 #include "translate.h"
 #include "assembler.h"
-// #include "c_bison.tab.c"
 
 
 static void print_usage_and_exit() {
     printf("Usage:\n");
     printf("./SimpleCCompiler <target.c> <target.s> <target.int> <target.out>\n");
-    // printf("  Runs both passes: assembler <input file> <intermediate file> <output file>\n");
-    // printf("  Run pass #1:      assembler -p1 <input file> <intermediate file>\n");
-    // printf("  Run pass #2:      assembler -p2 <intermediate file> <output file>\n");
-    // printf("Append -log <file name> after any option to save log files to a text file.\n");
     exit(0);
 }
 
@@ -27,6 +22,7 @@ extern int Parse1();
 
 
 int main(int argc, char **argv) {
+    // for debugger
     // std::cout << argc << std::endl;
     // for(int i = 0; i < argc; ++i)
     // {
@@ -37,11 +33,17 @@ int main(int argc, char **argv) {
         print_usage_and_exit();
     }
 
+    /* 
+    the first parse : convert c to mips(maybe there're some instructions doesn't support)
+    */
     freopen(argv[2], "w", stdout);
     freopen(argv[1], "r", stdin);
 
     Parse1();
    
+   /* 
+   the second parse : convert mips to machine code
+   */
     char *input, *inter, *output;
 
     input = argv[2];
