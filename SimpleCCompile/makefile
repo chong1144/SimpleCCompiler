@@ -1,4 +1,7 @@
 CXX =  mipsel-linux-gnu-g++-5
+asm/SimpleCCompiler.s: src/c_bison.tab.o src/c_lexer.yy.o
+	$(CXX) -std=gnu++11 -S src/SimpleCCompiler.cpp src/assembler.c src/utils.c src/tables.c src/translate_utils.c src/translate.c src/c_bison.tab.o src/c_lexer.yy.o && mv *.s asm/
+
 bin/SimpleCCompiler: src/c_bison.tab.o src/c_lexer.yy.o
 	$(CXX) -std=gnu++11 src/SimpleCCompiler.cpp src/assembler.c src/utils.c src/tables.c src/translate_utils.c src/translate.c src/c_bison.tab.o src/c_lexer.yy.o -o bin/SimpleCCompiler && chmod +x bin/SimpleCCompiler
 
