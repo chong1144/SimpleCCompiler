@@ -73,10 +73,10 @@ void BracketExpression::printer() const{
 	std::cout << "Brackets around ( expression ) with expression type = " << exp1->getType() << std::endl;
 }
 
-void codeGen(const int &registerName,mipsRegisters mips,const std::string &order = ""){
+void codeGen(const int &registerName,mipsRegisters mips1,const std::string &order = ""){
 
 	if(order == "return"){
-		Register r1 = mips.getValue(registerName);
+		Register r1 = mips1.getValue(registerName);
 		std::cout << "      li $t9," << r1.value << std::endl;
 		std::cout << "      move $v0,$t9" << std::endl;
 	}
@@ -92,7 +92,7 @@ void codeGen(const int &registerName,mipsRegisters mips,const std::string &order
 		}
 		ss << x;
 		name = "$t" + ss.str();
-		Register r1 = mips.getValue(registerName);
+		Register r1 = mips1.getValue(registerName);
 		std::cout << "      li " << name << "," << r1.value << std::endl;
 		ss.str("");		
 	}
